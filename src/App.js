@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./component/Header";
+import Main from "./component/Main";
+import Sidebar from "./component/SideBar";
+import {
+  BrowserRouter as Router,
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+} from "react-router-dom";
+
+
+export default class App extends React.Component {
+  state = {
+    navClosed: false
+  };
+  changeNavbar = () => {
+    this.setState({ navClosed: !this.state.navClosed });
+  };
+  render() {
+
+    return (
+      <Router>
+        <div className={`container ${this.state.navClosed && "nav-closed"}`}>
+          <Header changeNavbar={this.changeNavbar} />
+          <div className="main">
+            <Sidebar />
+            <Main />
+          </div>
+        </div>
+      </Router>
+    );
+  }
 }
-
-export default App;
